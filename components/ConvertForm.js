@@ -1,8 +1,12 @@
 import postmanToOpenApi from 'postman-to-openapi-module';
 import HorizontalLineText from './HorizontalLineText';
+import Loader from './Loader'
+import * as ga from '../lib/ga'
+import { useState } from 'react';
 
 function ConvertForm(props) {
-  let updateConvertedSchema = props.updateConvertedSchema;
+  const [fetchingCollection, setFetchingCollection] = useState(false),
+    updateConvertedSchema = props.updateConvertedSchema;
 
   const handleFormSubmit = (event) => {
     event.preventDefault(); // don't redirect the page
@@ -28,6 +32,15 @@ function ConvertForm(props) {
       });
 
     } else if (collectionUrl.length > 0) {
+      setFetchingCollection(true);
+
+      fetch(collectionUrl)
+      .then((res) => res.json())
+      .then((collectionData) => {
+        const openApiSchema = postmanToOpenApi(collectionData)
+        updateConvertedSchema(openApiSchema);
+      })
+
       ga.event({
         action: "collection_converted",
         params : {
@@ -43,11 +56,15 @@ function ConvertForm(props) {
     }
   };
 
+  if (fetchingCollection) {
+    return <Loader text='Fetching collection' />
+  }
+
   return (
     <form onSubmit={handleFormSubmit}>
       <div className="field">
         <label htmlFor="collection-url">Collection URL</label>
-        <input type="text" name="collection-url" id="collection-url" />
+        <input type="text" name="collection-url" id="collection-url" placeholder='https://www.postman.com/collections/<COLLECTION-ID>' />
       </div>
 
       <br />
