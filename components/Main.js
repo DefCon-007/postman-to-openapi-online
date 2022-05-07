@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ConvertForm from './ConvertForm';
 import SchemaView from './SchemaView';
+import CopyButton from './CopyButton';
 
 class Main extends React.Component {
   constructor() {
@@ -34,16 +35,18 @@ class Main extends React.Component {
 
   render() {
 
-    let close = <div className="close" onClick={() => {
-      if (this.state.convertedSchema) {
-        this.setState({
-          convertedSchema: ''
-        });
-      } else {
-        this.props.onCloseArticle()
-      }
+    const close = (
+      <div className="close" onClick={() => {
+        if (this.state.convertedSchema) {
+          this.setState({
+            convertedSchema: ''
+          });
+        } else {
+          this.props.onCloseArticle()
+        }
 
-    }}></div>
+      }}></div>
+    );
 
     return (
       <div id="main" style={this.props.timeout ? {display: 'flex'} : {display: 'none'}}>
@@ -60,6 +63,7 @@ class Main extends React.Component {
               </>
             )
           }
+          {this.state.convertedSchema && <CopyButton alertText='OpenAPI schema copied to clipboard!' copyText={this.state.convertedSchema}  />}
           {close}
         </article>
 

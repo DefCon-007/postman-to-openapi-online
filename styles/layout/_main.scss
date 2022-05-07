@@ -86,12 +86,63 @@
 				}
 			}
 
+			.copy-button {
+				display: block;
+				position: absolute;
+				top: 0;
+				right: 5rem;
+				width: 4rem;
+				height: 4rem;
+				cursor: pointer;
+				text-indent: 4rem;
+				overflow: hidden;
+				white-space: nowrap;
+
+				&:before {
+					@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out');
+					content: '';
+					display: block;
+					position: absolute;
+					top: 0.75rem;
+					left: 0.75rem;
+					width: 2.5rem;
+					height: 2.5rem;
+					border-radius: 100%;
+					background-position: center;
+					background-image: url('/static/images/copy.png');
+					background-size: 20px 20px;
+					background-repeat: no-repeat;
+				}
+
+				&:hover {
+					&:before {
+						background-color: _palette(border-bg);
+					}
+				}
+
+				&:active {
+					&:before {
+						background-color: _palette(border-bg-alt);
+					}
+				}
+			}
+
 		}
 
 		@include breakpoint(small) {
 			article {
 				@include padding(2rem, 2rem, (1.5rem, 0, 0.5rem, 0));
 				.close {
+					&:before {
+						top: 0.875rem;
+						left: 0.875rem;
+						width: 2.25rem;
+						height: 2.25rem;
+						background-size: 14px 14px;
+					}
+				}
+
+				.copy-button {
 					&:before {
 						top: 0.875rem;
 						left: 0.875rem;
