@@ -25,9 +25,7 @@ const Header = (props) => {
       <nav>
         <ul>
           <li><a href="#" onClick={(event) => {handleLinkClick(event, 'convert');}}>Convert</a></li>
-          <li><a href="#" onClick={(event) => {handleLinkClick(event, 'work')}}>Work</a></li>
           <li><a href="#" onClick={(event) => {handleLinkClick(event, 'about')}}>About</a></li>
-          <li><a href="#" onClick={(event) => {handleLinkClick(event, 'contact')}}>Contact</a></li>
         </ul>
       </nav>
     </header>
