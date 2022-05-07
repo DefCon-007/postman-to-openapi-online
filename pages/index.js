@@ -73,7 +73,7 @@ class IndexPage extends React.Component {
             <div className={`body ${this.state.loading} ${this.state.isArticleVisible ? "is-article-visible" : ""}`}>
                 <div>
                     <Head>
-                        <title>Next.js Starter</title>
+                        <title>Postman to OpenAPI</title>
                     </Head>
 
                     <div id="wrapper">
