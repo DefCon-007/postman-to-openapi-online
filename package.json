@@ -8,6 +8,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "@sentry/nextjs": "^6.19.7",
     "next": "^12.1.5",
     "postman-to-openapi-module": "https://github.com/DefCon-007/postman-to-openapi.git#master-client-side-module",
     "prop-types": "^15.8.1",
