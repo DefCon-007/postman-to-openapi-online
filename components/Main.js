@@ -60,21 +60,6 @@ class Main extends React.Component {
               </>
             )
           }
-          {/* <form>
-            <div className="field">
-              <label htmlFor="collection-url">Collection URL</label>
-              <input type="text" name="collection-url" id="collection-url" />
-            </div>
-
-            <div className="field">
-              <label htmlFor="collection-file">Collection File</label>
-              <input type="file" name="collection-file" id="collection-file" />
-            </div>
-
-            <ul className="actions">
-              <li><button onSubmit={this.handleFormSubmit}> Submit </button></li>
-            </ul>
-          </form> */}
           {close}
         </article>
 
