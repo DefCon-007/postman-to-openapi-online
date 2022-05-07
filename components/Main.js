@@ -1,17 +1,66 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import ConvertForm from './ConvertForm';
+import SchemaView from './SchemaView';
 
 class Main extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      convertedSchema: ''
+    }
+
+    this.updateConvertedSchema = this.updateConvertedSchema.bind(this);
+    this.getSchemaView = this.getSchemaView.bind(this);
+  }
+
+  updateConvertedSchema(convertedSchema) {
+    this.setState({
+      convertedSchema
+    });
+  }
+
+  getSchemaView(schema) {
+    const lines = schema.split('\n');
+    const schemaView = lines.map((line, index) => {
+      return (
+        <span>{line}</span>
+      )
+    });
+
+    return schemaView;
+  }
+
   render() {
 
-    let close = <div className="close" onClick={() => {this.props.onCloseArticle()}}></div>
+    let close = <div className="close" onClick={() => {
+      if (this.state.convertedSchema) {
+        this.setState({
+          convertedSchema: ''
+        });
+      } else {
+        this.props.onCloseArticle()
+      }
+
+    }}></div>
 
     return (
       <div id="main" style={this.props.timeout ? {display: 'flex'} : {display: 'none'}}>
 
         <article id="convert" className={`${this.props.article === 'convert' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
-          <h2 className="major">Convert</h2>
-          <form method="post" action="#">
+
+          {
+            this.state.convertedSchema ? (
+              <SchemaView schema={this.state.convertedSchema} />
+            ) : (
+              <>
+                <h2 className="major">Convert</h2>
+                <ConvertForm updateConvertedSchema={this.updateConvertedSchema}/>
+              </>
+            )
+          }
+          {/* <form>
             <div className="field">
               <label htmlFor="collection-url">Collection URL</label>
               <input type="text" name="collection-url" id="collection-url" />
@@ -23,10 +72,9 @@ class Main extends React.Component {
             </div>
 
             <ul className="actions">
-              <li><input type="submit" value="Send Message" className="special" /></li>
-              {/* <li><input type="reset" value="Reset" /></li> */}
+              <li><button onSubmit={this.handleFormSubmit}> Submit </button></li>
             </ul>
-          </form>
+          </form> */}
           {close}
         </article>
 

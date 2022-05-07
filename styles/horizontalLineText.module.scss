@@ -1,0 +1,21 @@
+@import './libs/vars';
+@import './libs/functions';
+// @import 'libs/mixins';
+@import 'libs/skel';
+
+.separator{
+  display:flex;
+  align-items: center;
+}
+
+.separator .line {
+  height: 3px;
+  flex: 1;
+  margin: 0 1rem;
+  background-color: _palette(fg-light);
+}
+
+.text {
+  padding: 0 1rem;
+  margin-bottom: 0 !important;
+}

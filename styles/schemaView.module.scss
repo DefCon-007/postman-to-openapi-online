@@ -1,0 +1,28 @@
+.codeContainer {
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+  counter-reset: line;
+}
+
+.codeContainer .line {
+  display: block;
+
+}
+
+.codeContainer .line:before {
+      counter-increment: line;
+      content: counter(line);
+      display: inline-block;
+      // border-right: 1px solid #ddd;
+
+      margin-right: .5rem;
+      color: #888;
+      width: 60px;
+      padding-right: 0.5rem;
+      margin-right: 10px;
+      text-align: right;
+}

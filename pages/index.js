@@ -5,7 +5,6 @@ import Header from "../components/Header"
 import Main from "../components/Main"
 import Footer from "../components/Footer"
 
-
 class IndexPage extends React.Component {
     constructor(props) {
         super(props)
@@ -75,10 +74,7 @@ class IndexPage extends React.Component {
                 <div>
                     <Head>
                         <title>Next.js Starter</title>
-                        {/* <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600,600i" rel="stylesheet" /> */}
                     </Head>
-
-                    {/* <style dangerouslySetInnerHTML={{ __html: stylesheet }} /> */}
 
                     <div id="wrapper">
                         <Header onOpenArticle={this.handleOpenArticle} timeout={this.state.timeout} />
