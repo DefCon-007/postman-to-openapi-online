@@ -20,10 +20,26 @@ function ConvertForm(props) {
       };
       reader.readAsText(collectionFile[0])
 
+      ga.event({
+        action: "collection_converted",
+        params : {
+          type: 'file_upload'
+        }
+      });
+
     } else if (collectionUrl.length > 0) {
+      ga.event({
+        action: "collection_converted",
+        params : {
+          type: 'url'
+        }
+      });
 
     } else {
-
+      ga.event({
+        action: "empty_convert_clicked",
+        params : { }
+      });
     }
   };
 

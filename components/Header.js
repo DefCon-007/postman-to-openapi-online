@@ -1,13 +1,20 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import logo from '../public/logo.png';
-
+import * as ga from '../lib/ga'
 
 const Header = (props) => {
   const {onOpenArticle} = props,
     handleLinkClick = (event, articleId) => {
       event.preventDefault();
       onOpenArticle(articleId);
+
+      ga.event({
+        action: "navigation_clicked",
+        params : {
+          id: articleId
+        }
+      });
     };
 
   return (
