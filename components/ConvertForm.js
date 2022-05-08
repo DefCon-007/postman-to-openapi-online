@@ -19,13 +19,11 @@ function ConvertForm(props) {
       reader.onload = async (e) => {
         const text = postmanToOpenApi(e.target.result)
         updateConvertedSchema(text);
-        console.log(text)
-        // alert(text)
       };
       reader.readAsText(collectionFile[0])
 
       ga.event({
-        action: "collection_converted",
+        action: 'collection_converted',
         params : {
           type: 'file_upload'
         }
@@ -42,7 +40,7 @@ function ConvertForm(props) {
       })
 
       ga.event({
-        action: "collection_converted",
+        action: 'collection_converted',
         params : {
           type: 'url'
         }
@@ -50,7 +48,7 @@ function ConvertForm(props) {
 
     } else {
       ga.event({
-        action: "empty_convert_clicked",
+        action: 'empty_convert_clicked',
         params : { }
       });
     }
@@ -62,22 +60,22 @@ function ConvertForm(props) {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className="field">
-        <label htmlFor="collection-url">Collection URL</label>
-        <input type="text" name="collection-url" id="collection-url" placeholder='https://www.postman.com/collections/<COLLECTION-ID>' />
+      <div className='field'>
+        <label htmlFor='collection-url'>Collection URL</label>
+        <input type='text' name='collection-url' id='collection-url' placeholder='https://www.postman.com/collections/<COLLECTION-ID>' />
       </div>
 
       <br />
-      <HorizontalLineText text="OR" />
+      <HorizontalLineText text='OR' />
       <br />
 
-      <div className="field">
-        <label htmlFor="collection-file">Collection File</label>
-        <input type="file" name="collection-file" id="collection-file" />
+      <div className='field'>
+        <label htmlFor='collection-file'>Collection File</label>
+        <input type='file' name='collection-file' id='collection-file' accept='.json,application/json'/>
       </div>
 
-      <ul className="actions">
-        <li><input type="submit" value="Submit" className="special" /></li>
+      <ul className='actions'>
+        <li><input type='submit' value='Submit' className='special' /></li>
       </ul>
     </form>
   );
