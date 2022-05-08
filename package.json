@@ -1,6 +1,6 @@
 {
-  "name": "next-netlify-starter",
-  "version": "0.5.0",
+  "name": "postman-to-openapi-online",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
