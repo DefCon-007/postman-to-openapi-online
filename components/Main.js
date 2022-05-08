@@ -3,6 +3,7 @@ import React from 'react';
 import ConvertForm from './ConvertForm';
 import SchemaView from './SchemaView';
 import CopyButton from './CopyButton';
+import { Toaster } from 'react-hot-toast';
 
 class Main extends React.Component {
   constructor() {
@@ -83,6 +84,8 @@ class Main extends React.Component {
           </ul>
           {close}
         </article>
+
+        <Toaster />
       </div>
     )
   }

@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import TOAST_OPTIONS from '../lib/constants';
+import toast from 'react-hot-toast';
 
 async function copyTextToClipboard(text) {
   if ('clipboard' in navigator) {
@@ -10,13 +12,12 @@ async function copyTextToClipboard(text) {
 
 const CopyButton = (props) => (
   <div className="copy-button" onClick={() => {
-    copyTextToClipboard(props.copyText)
-      .then(() => {
-        alert(props.alertText);
-      });
-  }}>
-
-  </div>
+      copyTextToClipboard(props.copyText)
+        .then(() => {
+          toast.success(props.alertText, TOAST_OPTIONS);
+        });
+    }}
+  />
 )
 
 CopyButton.propTypes = {

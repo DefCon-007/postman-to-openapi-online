@@ -74,9 +74,8 @@
 	}
 
 	input[type="text"],
-	input[type="password"],
-	input[type="email"],
-	input[type="tel"],
+	input[type="url"],
+	input[type="file"]
 	select,
 	textarea {
 		@include vendor('appearance', 'none');
@@ -139,8 +138,8 @@
 	}
 
 	input[type="text"],
-	input[type="password"],
-	input[type="email"],
+	input[type="url"],
+	input[type="file"]
 	select {
 		height: _size(element-height);
 	}
