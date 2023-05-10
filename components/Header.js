@@ -1,24 +1,25 @@
-import PropTypes from 'prop-types';
 import Image from 'next/image';
+import { usePostHog } from 'posthog-js/react';
+import PropTypes from 'prop-types';
 import logo from '../public/logo.png';
-import * as ga from '../lib/ga'
 
 const Header = (props) => {
-  const {onOpenArticle} = props,
+  const { onOpenArticle } = props,
+    posthog = usePostHog(),
     handleLinkClick = (event, articleId) => {
       event.preventDefault();
       onOpenArticle(articleId);
 
-      ga.event({
-        action: "navigation_clicked",
-        params : {
+      posthog.capture(
+        "navigation_clicked",
+        {
           id: articleId
         }
-      });
+      );
     };
 
   return (
-    <header id="header" style={props.timeout ? {display: 'none'} : {}}>
+    <header id="header" style={props.timeout ? { display: 'none' } : {}}>
       <div className="logo">
         <Image alt="logo" src={logo} width='150px' height='150px' />
       </div>
@@ -31,8 +32,8 @@ const Header = (props) => {
       </div>
       <nav>
         <ul>
-          <li><a href="#" onClick={(event) => {handleLinkClick(event, 'convert');}}>Convert</a></li>
-          <li><a href="#" onClick={(event) => {handleLinkClick(event, 'about')}}>About</a></li>
+          <li><a href="#" onClick={(event) => { handleLinkClick(event, 'convert'); }}>Convert</a></li>
+          <li><a href="#" onClick={(event) => { handleLinkClick(event, 'about') }}>About</a></li>
         </ul>
       </nav>
     </header>

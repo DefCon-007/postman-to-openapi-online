@@ -1,11 +1,11 @@
-import postmanToOpenApi from 'postman-to-openapi-module';
-import HorizontalLineText from './HorizontalLineText';
-import Loader from './Loader'
-import * as ga from '../lib/ga'
 import * as Sentry from "@sentry/nextjs";
+import { usePostHog } from 'posthog-js/react';
+import postmanToOpenApi from 'postman-to-openapi-module';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import TOAST_OPTIONS from '../lib/constants';
+import HorizontalLineText from './HorizontalLineText';
+import Loader from './Loader';
 
 const JSON_FILE_ERROR = 'Unable to parse uploaded collection JSON. Please check the uploaded file',
   EMPTY_FORM_SUBMIT = 'Either enter a collection URL or upload collection JSON.',
@@ -14,7 +14,8 @@ const JSON_FILE_ERROR = 'Unable to parse uploaded collection JSON. Please check 
 
 function ConvertForm(props) {
   const [fetchingCollection, setFetchingCollection] = useState(false),
-    updateConvertedSchema = props.updateConvertedSchema;
+    updateConvertedSchema = props.updateConvertedSchema,
+    posthog = usePostHog();
 
   const handleFormSubmit = (event) => {
     try {
@@ -37,43 +38,42 @@ function ConvertForm(props) {
         };
         reader.readAsText(collectionFile[0])
 
-        ga.event({
-          action: 'collection_converted',
-          params : {
+        posthog.capture(
+          'collection_converted',
+          {
             type: 'file_upload'
           }
-        });
+        );
 
       } else if (collectionUrl.length > 0) {
         setFetchingCollection(true);
 
         fetch(collectionUrl)
-        .then((res) => res.json())
-        .then((collectionData) => {
-          const openApiSchema = postmanToOpenApi(collectionData)
-          updateConvertedSchema(openApiSchema);
-        })
-        .catch(((err) => {
-          setFetchingCollection(false);
+          .then((res) => res.json())
+          .then((collectionData) => {
+            const openApiSchema = postmanToOpenApi(collectionData)
+            updateConvertedSchema(openApiSchema);
+          })
+          .catch(((err) => {
+            setFetchingCollection(false);
 
-          toast.error(INVALID_URL, TOAST_OPTIONS);
-          Sentry.captureException(err);
-        }))
+            toast.error(INVALID_URL, TOAST_OPTIONS);
+            Sentry.captureException(err);
+          }))
 
-        ga.event({
-          action: 'collection_converted',
-          params : {
+        posthog.capture('collection_converted',
+          {
             type: 'url'
           }
-        });
+        );
 
       } else {
         toast.error(EMPTY_FORM_SUBMIT, TOAST_OPTIONS);
 
-        ga.event({
-          action: 'empty_convert_clicked',
-          params : { }
-        });
+        posthog.capture(
+          'empty_convert_clicked',
+          {}
+        );
       }
     } catch (err) {
       setFetchingCollection(false);
