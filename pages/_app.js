@@ -1,8 +1,10 @@
-import '@styles/main.scss'
-import { useRouter } from 'next/router'
-import posthog from "posthog-js"
-import { PostHogProvider } from 'posthog-js/react'
-import { useEffect } from 'react'
+import '@styles/main.scss';
+import { useRouter } from 'next/router';
+import posthog from "posthog-js";
+import { PostHogProvider } from 'posthog-js/react';
+import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 // Check that PostHog is client-side
@@ -34,6 +36,19 @@ function Application({ Component, pageProps }) {
     <>
       <PostHogProvider client={posthog}>
         <Component {...pageProps} />
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable={false}
+          pauseOnHover
+          theme="colored"
+          style={{ width: "30%" }}
+        />
       </PostHogProvider>
     </>
   )

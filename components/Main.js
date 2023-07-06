@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ConvertForm from './ConvertForm';
-import SchemaView from './SchemaView';
 import CopyButton from './CopyButton';
-import { Toaster } from 'react-hot-toast';
+import SchemaView from './SchemaView';
 
 class Main extends React.Component {
   constructor() {
@@ -18,6 +17,7 @@ class Main extends React.Component {
   }
 
   updateConvertedSchema(convertedSchema) {
+    console.log('Updating converted schema')
     this.setState({
       convertedSchema
     });
@@ -50,9 +50,9 @@ class Main extends React.Component {
     );
 
     return (
-      <div id="main" style={this.props.timeout ? {display: 'flex'} : {display: 'none'}}>
+      <div id="main" style={this.props.timeout ? { display: 'flex' } : { display: 'none' }}>
 
-        <article id="convert" className={`${this.props.article === 'convert' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
+        <article id="convert" className={`${this.props.article === 'convert' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{ display: 'none' }}>
 
           {
             this.state.convertedSchema ? (
@@ -60,15 +60,15 @@ class Main extends React.Component {
             ) : (
               <>
                 <h2 className="major">Convert</h2>
-                <ConvertForm updateConvertedSchema={this.updateConvertedSchema}/>
+                <ConvertForm updateConvertedSchema={this.updateConvertedSchema} />
               </>
             )
           }
-          {this.state.convertedSchema && <CopyButton alertText='OpenAPI schema copied to clipboard!' copyText={this.state.convertedSchema}  />}
+          {this.state.convertedSchema && <CopyButton alertText='OpenAPI schema copied to clipboard!' copyText={this.state.convertedSchema} />}
           {close}
         </article>
 
-        <article id="about" className={`${this.props.article === 'about' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
+        <article id="about" className={`${this.props.article === 'about' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{ display: 'none' }}>
           <h2 className="major">About</h2>
           <p>
             A small utility to convert Postman <a href='https://www.postman.com/collection/' target='_blank'>collections</a> to <a href='https://www.openapis.org/' target='_blank'>Open API</a> schema in one click. <br />
@@ -84,8 +84,6 @@ class Main extends React.Component {
           </ul>
           {close}
         </article>
-
-        <Toaster />
       </div>
     )
   }
