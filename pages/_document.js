@@ -26,6 +26,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="postman2openapi" data-description="Support me on Buy me a coffee!" data-message="If this project helps you, support me with a coffee! Thank you! 🙌" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>       
         </body>
       </Html>
     )
